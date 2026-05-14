@@ -8,6 +8,9 @@ console.log('Mapbox GL JS Loaded:', mapboxgl);
 const BLUEBIKES_STATIONS_URL =
   'https://dsc106.com/labs/lab07/data/bluebikes-stations.json';
 
+const BLUEBIKES_TRAFFIC_URL =
+  'https://dsc106.com/labs/lab07/data/bluebikes-traffic-2024-03.csv';
+
 // Set your Mapbox access token here
 mapboxgl.accessToken = 'pk.eyJ1Ijoia3lkdW9uZzEiLCJhIjoiY21wNXBleW8zMTJheDJ5bzQwZ3JiMXJsaCJ9.1Z_6HloVPtaR1689yQjpMg';
 
@@ -73,6 +76,10 @@ map.on('load', async () => {
     const stations = jsonData.data.stations;
 
     console.log('Stations Array:', stations);
+
+    const trips = await d3.csv(BLUEBIKES_TRAFFIC_URL);
+
+    console.log('Loaded Trips:', trips);
 
     // Append circles to the SVG for each station
     const circles = svg
