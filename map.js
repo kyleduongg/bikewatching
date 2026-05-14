@@ -11,6 +11,13 @@ const BLUEBIKES_STATIONS_URL =
 const BLUEBIKES_TRAFFIC_URL =
   'https://dsc106.com/labs/lab07/data/bluebikes-traffic-2024-03.csv';
 
+let timeFilter = -1;
+
+function formatTime(minutes) {
+  const date = new Date(0, 0, 0, 0, minutes);
+  return date.toLocaleString('en-US', { timeStyle: 'short' });
+}
+
 // Set your Mapbox access token here
 mapboxgl.accessToken = 'pk.eyJ1Ijoia3lkdW9uZzEiLCJhIjoiY21wNXBleW8zMTJheDJ5bzQwZ3JiMXJsaCJ9.1Z_6HloVPtaR1689yQjpMg';
 
@@ -144,6 +151,27 @@ map.on('load', async () => {
     map.on('zoom', updatePositions);
     map.on('resize', updatePositions);
     map.on('moveend', updatePositions);
+
+    const timeSlider = document.getElementById('time-filter');
+    const selectedTime = document.getElementById('selected-time');
+    const anyTimeLabel = document.getElementById('any-time');
+
+    function updateTimeDisplay() {
+      timeFilter = Number(timeSlider.value);
+
+      if (timeFilter === -1) {
+        selectedTime.textContent = '';
+        anyTimeLabel.style.display = 'inline-block';
+      } else {
+        selectedTime.textContent = formatTime(timeFilter);
+        anyTimeLabel.style.display = 'none';
+      }
+
+      // Filtering logic comes in the next step
+    }
+
+    timeSlider.addEventListener('input', updateTimeDisplay);
+    updateTimeDisplay();
   } catch (error) {
     console.error('Error loading JSON:', error);
   }
