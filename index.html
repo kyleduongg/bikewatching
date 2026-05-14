@@ -14,7 +14,16 @@
   <script src="map.js" type="module"></script>
 </head>
 <body>
-  <h1>🚴🏼‍♀️ Bikewatching</h1>
+  <header>
+    <h1>🚴🏼‍♀️ Bikewatching</h1>
+
+    <label>
+      Filter by time:
+      <input id="time-filter" type="range" min="-1" max="1440" value="-1" />
+      <time id="selected-time"></time>
+      <em id="any-time">(any time)</em>
+    </label>
+  </header>
 
   <p>
     This project explores bike traffic patterns through interactive maps and visualizations.

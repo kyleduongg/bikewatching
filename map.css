@@ -32,3 +32,29 @@ body {
   stroke-width: 1;
   pointer-events: auto;
 }
+
+header {
+  display: flex;
+  gap: 1em;
+  align-items: baseline;
+  width: 100%;
+}
+
+header label {
+  margin-left: auto;
+}
+
+#time-filter {
+  width: 20em;
+}
+
+#selected-time,
+#any-time {
+  display: block;
+  text-align: right;
+}
+
+#any-time {
+  color: gray;
+  font-style: italic;
+}
